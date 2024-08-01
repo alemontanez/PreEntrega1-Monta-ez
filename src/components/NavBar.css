@@ -1,0 +1,10 @@
+.navbar {
+    padding: 1rem;
+    background-color: rgb(58, 58, 58);
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    margin: 0 5px;
+}
