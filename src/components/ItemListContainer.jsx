@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
+import ItemList from './ItemList'
 import './ItemListContainer.css'
 
-export default function ItemListContainer({ greeting }) {
-    return (
-        <>
-        <div className="container">
-            <h2>{greeting}</h2>
-        </div>
-        </>
-    )
+export default function ItemListContainer() {
+
+  return (
+    <>
+      <div className="container">
+        <ItemList />
+      </div>
+    </>
+  )
 }

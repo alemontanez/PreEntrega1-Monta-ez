@@ -2,5 +2,11 @@
     display: flex;
     justify-content: center;
     height: 80vh;
-    align-items: center;
+    margin: 50px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px;
 }

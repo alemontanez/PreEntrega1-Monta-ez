@@ -1,14 +1,22 @@
 // import { useState } from 'react'
-import './App.css'
 import NavBar from './components/NavBar'
-import ItemListContainer from './components/ItemListContainer'
+import HomeView from './routes/HomeView'
+import ItemDetailView from './routes/ItemDetailView'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 
 function App() {
 
   return (
     <>
-      <NavBar/>
-      <ItemListContainer greeting='Hola'/>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route exact path='/' element={<HomeView />} />
+          <Route exact path='/category/:categoryId' element={<HomeView />} />
+          <Route exact path='/product/:productId' element={<ItemDetailView />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
