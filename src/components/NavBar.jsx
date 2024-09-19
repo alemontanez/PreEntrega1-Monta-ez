@@ -7,20 +7,20 @@ export default function NavBar() {
     <>
       <nav className="navbar">
         <div>
-          <button>
-            <Link to={'/'}>Marca 👕</Link>
-          </button>
+            <Link to={'/'}>
+              <button>Marca 👕</button>
+            </Link>
         </div>
         <div>
-          <button>
-            <Link to={'/'}>Inicio</Link>
-          </button>
-          <button>
-            <Link to={'/category/verano'}>Verano</Link>
-          </button>
-          <button>
-            <Link to={'/category/invierno'}>Invierno</Link>
-          </button>
+          <Link to={'/'}>
+            <button>Inicio</button>
+          </Link>
+          <Link to={'/category/verano'}>
+            <button>Verano</button>
+          </Link>
+          <Link to={'/category/invierno'}>
+            <button>Invierno</button>
+          </Link>
         </div>
         <div>
           <CartWidget />

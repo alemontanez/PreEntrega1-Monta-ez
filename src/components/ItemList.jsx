@@ -1,28 +1,27 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Item from "./Item";
-import { getAllProducts, getCategory } from "../productsMock.js";
+import { getCategory, getProducts } from "../productsMock.js";
+import { ProductContext } from "../context/ProductContext.jsx";
 import { useParams } from "react-router-dom";
 
 export default function ItemList() {
 
   const { categoryId } = useParams()
-
-  const [allProducts, setAllProducts] = useState([])
+  const [products, setProducts] = useContext(ProductContext)
 
   useEffect(() => {
     if (categoryId) {
-      setAllProducts(getCategory(categoryId))
+      setProducts(getCategory(categoryId))
     } else {
-      getAllProducts
-      .then((data) => setAllProducts(data))
+      getProducts().then((data) => setProducts(data))
     }
-  }, [categoryId])
+  }, [categoryId, setProducts])
 
   return (
     <>
       {
-        allProducts.map(product =>
-          <Item key={product.id} id={product.id} title={product.title} stock={product.stock} price={product.price} img={product.image} />
+        products.map(product =>
+          <Item key={product.id} product={product} />
         )
       }
     </>

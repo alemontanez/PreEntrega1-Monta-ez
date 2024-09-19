@@ -33,10 +33,11 @@ const products = [
   }
 ]
 
-export const getAllProducts = new Promise((resolve, reject) => {
-  resolve(products)
-  reject('Error al obtener los productos.')
-})
+export const getProducts = async() => {
+  return new Promise((resolve) => {
+    resolve(products)
+  })
+}
 
 export const getProduct = (id) => {
   return products.find(product => product.id == id)

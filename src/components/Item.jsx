@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 
-export default function Item( {id, title, price, img} ) {
+export default function Item({ product }) {
 
   return (
     <>
       <div className="card">
-        <img src={img} alt="" />
-        <h2>{title}</h2>
-        <p>Precio: ${price}</p>
-        <button>
-          <Link to={`/product/${id}`}>Ver detalle</Link>
-        </button>
+        <img src={product.image} alt="" />
+        <h2>{product.title}</h2>
+        <p>Precio: ${product.price}</p>
+        <Link to={`/product/${product.id}`}>
+          <button>Ver detalle</button>
+        </Link>
       </div>
     </>
   )
