@@ -15,11 +15,11 @@ export default function NavBar() {
           <Link to={'/'}>
             <button>Inicio</button>
           </Link>
-          <Link to={'/category/verano'}>
-            <button>Verano</button>
+          <Link to={'/category/remeras'}>
+            <button>Remeras</button>
           </Link>
-          <Link to={'/category/invierno'}>
-            <button>Invierno</button>
+          <Link to={'/category/buzos'}>
+            <button>Buzos</button>
           </Link>
         </div>
         <div>

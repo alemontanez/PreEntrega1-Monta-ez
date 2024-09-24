@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProduct } from '../productsMock.js'
+// import { getProduct } from '../productsMock.js'
 import { CartContext } from "../context/CartContext.jsx";
 import ItemCount from "../components/ItemCount";
+import {doc, getDoc, getFirestore} from 'firebase/firestore'
 
 export default function ItemDetailView() {
 
@@ -49,8 +50,18 @@ export default function ItemDetailView() {
     }
   }
 
+  // useEffect(() => {
+  //   setProduct(getProduct(productId))
+  // }, [productId])
+
   useEffect(() => {
-    setProduct(getProduct(productId))
+    const db = getFirestore()
+    const getProduct = doc(db, 'products', productId)
+    getDoc(getProduct).then((snapshot) => {
+      if (snapshot.exists()) {
+        setProduct({id: snapshot.id, ...snapshot.data()})
+      }
+    })
   }, [productId])
 
   return (

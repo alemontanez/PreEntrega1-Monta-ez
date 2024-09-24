@@ -1,21 +1,33 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Item from "./Item";
-import { getCategory, getProducts } from "../productsMock.js";
-import { ProductContext } from "../context/ProductContext.jsx";
 import { useParams } from "react-router-dom";
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
 
 export default function ItemList() {
 
   const { categoryId } = useParams()
-  const [products, setProducts] = useContext(ProductContext)
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
+    const db = getFirestore()
     if (categoryId) {
-      setProducts(getCategory(categoryId))
+      const productsCollection = query(collection(db, 'products'), where('category', '==', categoryId))
+      getDocs(productsCollection).then((snapshot) => {
+        if (snapshot.size === 0) {
+          console.log('no hay productos')
+        }
+        setProducts(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
+      })
     } else {
-      getProducts().then((data) => setProducts(data))
+      const productsCollection = collection(db, 'products')
+      getDocs(productsCollection).then((snapshot) => {
+        if (snapshot.size === 0) {
+          console.log('no hay productos')
+        }
+        setProducts(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
+      })
     }
-  }, [categoryId, setProducts])
+  }, [categoryId])
 
   return (
     <>
