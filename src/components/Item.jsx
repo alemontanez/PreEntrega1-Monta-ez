@@ -6,12 +6,13 @@ export default function Item({ product }) {
   return (
     <>
       <div className="card">
-        <img src={product.image} alt="" />
+        <img src={product.imageUrl} alt="" />
         <h2>{product.title}</h2>
-        <p>Precio: ${product.price}</p>
-        <Link to={`/product/${product.id}`}>
-          <button>Ver detalle</button>
-        </Link>
+        <div>
+          <Link to={`/product/${product.id}`}>
+            <button><span>Ver detalle</span></button>
+          </Link>
+        </div>
       </div>
     </>
   )

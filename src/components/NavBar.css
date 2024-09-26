@@ -1,10 +1,20 @@
 .navbar {
   padding: 1rem;
-  background-color: rgb(58, 58, 58);
+  background-color: rgb(49, 66, 87);
   display: flex;
   justify-content: space-between;
 }
-
-button {
+.navbar button {
   margin: 0 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: white;
+}
+.navbar button:hover {
+  background-color: rgb(220, 220, 220);
+  outline: solid 1px rgb(220, 220, 220);
 }

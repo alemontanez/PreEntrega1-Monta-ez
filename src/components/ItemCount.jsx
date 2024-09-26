@@ -3,10 +3,11 @@ export default function ItemCount( {handleClickDec, handleClickInc, count} ) {
 
   return (
     <>
-      <div>
-        <button onClick={() => handleClickDec()}>-</button>
+      <div className="item-count">
+        <span>Cantidad: </span>
+        <button onClick={() => handleClickDec()}><span>-</span></button>
         <span> {count} </span>
-        <button onClick={() => handleClickInc()}>+</button>
+        <button onClick={() => handleClickInc()}><span>+</span></button>
       </div>
     </>
   )

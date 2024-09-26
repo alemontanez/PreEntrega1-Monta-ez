@@ -3,12 +3,13 @@ import CartWidget from "./CartWidget"
 import './NavBar.css'
 
 export default function NavBar() {
+  
   return (
     <>
       <nav className="navbar">
         <div>
             <Link to={'/'}>
-              <button>Marca 👕</button>
+              <button>Horizons 👕</button>
             </Link>
         </div>
         <div>

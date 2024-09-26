@@ -1,7 +1,8 @@
 import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
 import CartItem from '../components/CartItem'
-import '../components/CartItem.css'
+import '../components/Cart.css'
+import { Link } from "react-router-dom"
 
 export default function CartView() {
 
@@ -9,18 +10,31 @@ export default function CartView() {
   
   return (
     <>
+      <h1 className="cart-title">Carrito</h1>
       <div className="cart-container">
-        <h2>Carrito</h2>
         {
           cart.length === 0 
-          ? <p>El carrito se encuentra vacío.</p>
+          ? (
+            <div>
+              <p>El carrito se encuentra vacío.</p>
+              <Link to='/'>
+                <p>Volver a los productos.</p>
+              </Link>
+            </div>
+          )
           : (
+            <>
             <div>
               {cart.map(item => <CartItem key={item.id} item={item} removeItem={removeItem}/>)}
-              <p>Precio final: ${totalToPay()}</p>
-              <button>Finalizar compra</button>
-              <button onClick={() => clearCart()}>Vaciar carrito</button>
             </div>
+            <div className="cart-final">
+                <p>Precio final: ${totalToPay()}</p>
+                <div>
+                  <button><span>Finalizar compra</span></button>
+                  <button onClick={() => clearCart()}><span>Vaciar carrito</span></button>
+                </div>
+            </div>
+            </>
           )
         }
       </div>

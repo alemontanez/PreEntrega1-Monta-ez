@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { getProduct } from '../productsMock.js'
-import { CartContext } from "../context/CartContext.jsx";
-import ItemCount from "../components/ItemCount";
 import {doc, getDoc, getFirestore} from 'firebase/firestore'
+import { CartContext } from "../context/CartContext.jsx";
+import ItemDetail from "../components/ItemDetail.jsx";
+import Swal from 'sweetalert2'
 
 export default function ItemDetailView() {
 
@@ -31,13 +31,23 @@ export default function ItemDetailView() {
 
     if (index === -1) {
       addItem(productWithQuantity)
-      console.log('se agregó')
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Producto agregado al carrito.",
+        showConfirmButton: false,
+        timer: 1500
+      })
     } else {
       const newCart = [...cart]
       const newQuantity = newCart[index].quantity + quantity
 
       if (newQuantity > newCart[index].stock) {
-        alert('Se sobrepasó la cantidad de stock')
+        Swal.fire({
+          title: "Ocurrió un problema",
+          text: "Se sobrepasó la cantidad de stock indicada.",
+          icon: "error"
+        });
         return
       }
 
@@ -46,13 +56,16 @@ export default function ItemDetailView() {
         quantity: newQuantity
       }
       setCart(newCart)
-      console.log('Cantidad actualizada')
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Cantidad actualizada.",
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
+    setCount(1)
   }
-
-  // useEffect(() => {
-  //   setProduct(getProduct(productId))
-  // }, [productId])
 
   useEffect(() => {
     const db = getFirestore()
@@ -66,16 +79,7 @@ export default function ItemDetailView() {
 
   return (
     <>
-      <div className="container">
-        <div className="item-detail">
-          <img src={product.image} alt="" />
-          <h2>{product.title}</h2>
-          <p>Precio: ${product.price}</p>
-          <p>Stock: {product.stock}</p>
-          <ItemCount price={product.price} stock={product.stock} handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count} />
-          <button onClick={() => onAdd(count)}>Agregar al carrito</button>
-        </div>
-      </div>
+      <ItemDetail product={product} handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count} onAdd={onAdd}/>
     </>
   )
 }
