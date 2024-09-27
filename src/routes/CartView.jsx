@@ -3,10 +3,11 @@ import { CartContext } from "../context/CartContext"
 import CartItem from '../components/CartItem'
 import '../components/Cart.css'
 import { Link } from "react-router-dom"
+import UserInfo from "../components/UserInfo"
 
 export default function CartView() {
 
-  const [cart, , , removeItem, clearCart, , totalToPay] = useContext(CartContext)
+  const [cart, , , removeItem, clearCart, , totalToPay, createNewOrder] = useContext(CartContext)
   
   return (
     <>
@@ -28,6 +29,7 @@ export default function CartView() {
               {cart.map(item => <CartItem key={item.id} item={item} removeItem={removeItem}/>)}
             </div>
             <div className="cart-final">
+              <UserInfo cart={cart} createNewOrder={createNewOrder}/>
                 <p>Precio final: ${totalToPay()}</p>
                 <div>
                   <button><span>Finalizar compra</span></button>
