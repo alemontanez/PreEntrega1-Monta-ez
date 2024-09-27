@@ -91,13 +91,12 @@ export function CartProvider({ children }) {
           setOrder(snapshot.id)
           const getDoc = doc(db, 'orders', snapshot.id)
           updateDoc(getDoc, {order: snapshot.id})
-          // alert(snapshot.id)
+          Swal.fire({
+            title: "Compra realizada con éxito.",
+            text: `ID de compra: ${snapshot.id}`,
+            icon: "success"
+          });
         })
-        Swal.fire({
-          title: "Compra realizada con éxito",
-          // text: `Id de compra: ${snapshot.id}`,
-          icon: "success"
-        });
       }
     });
 

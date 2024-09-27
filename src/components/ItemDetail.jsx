@@ -12,7 +12,7 @@ export default function ItemDetail({ product, handleClickDec, handleClickInc, co
           <h2>{product.title}</h2>
           <p>Precio: ${product.price}</p>
           <p>Stock: {product.stock}</p>
-          <ItemCount price={product.price} stock={product.stock} handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count} />
+          <ItemCount  handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count} />
           <button onClick={() => onAdd(count)}><span>Agregar al carrito</span></button>
         </div>
       </div>
