@@ -9,10 +9,7 @@ export const CartContext = createContext()
 export function CartProvider({ children }) {
 
   const [cart, setCart] = useState([])
-  // eslint-disable-next-line no-unused-vars
-  const [order, setOrder] = useState('')
   const navigate = useNavigate()
-
 
   const addItem = (item) => {
     setCart([...cart, item])
@@ -75,7 +72,6 @@ export function CartProvider({ children }) {
     return total
   }
 
-
   const createNewOrder = (newOrder) => {
     Swal.fire({
       title: "¿Finalizar compra?",
@@ -90,7 +86,6 @@ export function CartProvider({ children }) {
         const db = getFirestore()
         const orders = collection(db, 'orders')
         addDoc(orders, newOrder).then((snapshot) => {
-          setOrder(snapshot.id)
           const getDoc = doc(db, 'orders', snapshot.id)
           updateDoc(getDoc, {order: snapshot.id})
           Swal.fire({
@@ -105,7 +100,6 @@ export function CartProvider({ children }) {
         }, 1000)
       }
     });
-
   }
 
   return (

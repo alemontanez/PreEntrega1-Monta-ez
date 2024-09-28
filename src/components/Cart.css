@@ -64,3 +64,28 @@
 .cart-final button:first-child {
   margin-right: 15px;
 }
+
+
+.user-form{
+  font-size: large;
+}
+.user-form label {
+  display: block;
+  margin-top: 10px;
+}
+.user-form input {
+  border: solid 1px;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: medium;
+  margin: 8px 0;
+  width: 240px;
+}
+.user-form div {
+  margin-top: 15px;
+}
+.user-form span:not(:last-child) {
+  display: block;
+  font-size: small;
+  color: rgb(200, 30, 30)
+}

@@ -37,7 +37,6 @@ export default function CartItem({ item, removeItem }) {
           <h2>{item.title}</h2>
           <p>Valor unidad: {item.price}</p>
           <ItemCount handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count}/>
-          {/* <p>Cantidad: {item.quantity}</p> */}
           <p>Valor: ${item.price * item.quantity}</p>
           <button onClick={() => removeItem(item.id)}><span>Eliminar del carrito</span></button>
         </div>

@@ -43,16 +43,3 @@
 .item-card div button:hover {
   background-color: rgb(221, 221, 221);
 }
-
-/* .item-count div button {
-  padding: 1px 4px;
-  margin: 4px;
-  min-width: 26px;
-  background-color: inherit;
-  color: rgb(121, 121, 121);
-  border: solid 1px rgb(121, 121, 121);
-  border-radius: 20px;
-}
-.item-count button:hover {
-  background-color: rgb(221, 221, 221);
-} */

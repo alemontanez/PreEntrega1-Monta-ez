@@ -1,42 +1,108 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 export default function UserInfo({ cart, createNewOrder, clearCart }) {
 
-  const [nombre, setNombre] = useState('')
-  const [apellido, setApellido] = useState('')
-  const [email, setEmail] = useState('')
-  const [telefono, setTelefono] = useState('')
+  const { register, handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-  const handleSubmit = () => {
+  const onSubmit = handleSubmit((data) => {
     const order = {
-      buyer: {
-        nombre,
-        apellido,
-        email,
-        telefono
-      },
+      customer: data,
       items: cart,
-      creadoEn: new Date()
+      created: new Date()
     }
     createNewOrder(order)
-  }
+  })
 
   return (
     <>
-      <div className='user-form'>
-        <h3>Datos de compra:</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 30 }}>
-          <input type='text' placeholder='Nombre' value={nombre} onChange={(e) => setNombre(e.target.value)} />
-          <input type='text' placeholder='Apellido' value={apellido} onChange={(e) => setApellido(e.target.value)} />
-          <input type='text' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type='text' placeholder='Telefono' value={telefono} onChange={(e) => setTelefono(e.target.value)} />
-        </div>
-        <div>
-          <button onClick={handleSubmit}><span>Finalizar compra</span></button>
-          <button onClick={() => clearCart()}><span>Vaciar carrito</span></button>
-        </div>
+      <div>
+        <button onClick={() => clearCart()}><span>Vaciar carrito</span></button>
       </div>
+      <h3>Datos de compra:</h3>
+      <form className='user-form' onSubmit={onSubmit}>
+        <label htmlFor="nombre">Nombre:</label>
+        <input
+          type="text"
+          {...register('nombre', {
+            required: {
+              value: true,
+              message: 'Nombre es requerido'
+            },
+            minLength: {
+              value: 2,
+              message: 'Nombre debe tener al menos 2 caracteres'
+            },
+            maxLength: {
+              value: 20,
+              message: 'Nombre debe tener máximo 20 caracteres'
+            }
+          })}
+        />
+        {
+          errors.nombre && <span>{errors.nombre.message}</span>
+        }
+        <label htmlFor="apellido">Apellido:</label>
+        <input
+          type="text"
+          {...register('apellido', {
+            required: {
+              value: true,
+              message: 'Apellido es requerido'
+            },
+            minLength: {
+              value: 2,
+              message: 'Apellido debe tener al menos 2 caracteres'
+            },
+            maxLength: {
+              value: 20,
+              message: 'Apellido debe tener máximo 20 caracteres'
+            }
+          })}
+        />
+        {
+          errors.apellido && <span>{errors.apellido.message}</span>
+        }
+        <label htmlFor="correo">Correo:</label>
+        <input
+          type="email"
+          {...register('correo', {
+            required: {
+              value: true,
+              message: 'Correo es requerido'
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: 'Correo no válido'
+            }
+          })}
+        />
+        {
+          errors.correo && <span>{errors.correo.message}</span>
+        }
+        <label htmlFor="telefono">Teléfono:</label>
+        <input
+          type="tel"
+          {...register('telefono', {
+            required: {
+              value: true,
+              message: 'Teléfono es requerido'
+            },
+            pattern: {
+              value: /^\d{6,15}$/,
+              message: 'Teléfono no válido'
+            }
+          })}
+        />
+        {
+          errors.telefono && <span>{errors.telefono.message}</span>
+        }
+        <div>
+          <button ><span>Finalizar compra</span></button>
+        </div>
+      </form>
     </>
   )
 }

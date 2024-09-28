@@ -1,8 +1,8 @@
+import '../components/Cart.css'
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { CartContext } from "../context/CartContext"
 import CartItem from '../components/CartItem'
-import '../components/Cart.css'
-import { Link } from "react-router-dom"
 import UserInfo from "../components/UserInfo"
 
 export default function CartView() {
