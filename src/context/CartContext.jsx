@@ -2,6 +2,7 @@
 import { createContext, useState } from "react";
 import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 export const CartContext = createContext()
 
@@ -10,6 +11,8 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([])
   // eslint-disable-next-line no-unused-vars
   const [order, setOrder] = useState('')
+  const navigate = useNavigate()
+
 
   const addItem = (item) => {
     setCart([...cart, item])
@@ -17,14 +20,14 @@ export function CartProvider({ children }) {
 
   const removeItem = (id) => {
     Swal.fire({
-      title: "¿Estas seguro?",
-      text: "Una vez hecho no se puede revertir.",
+      title: "¿Estás seguro?",
+      text: "Se eliminará el producto del carrito.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, estoy seguro.",
-      cancelButtonText: 'Cancelar.'
+      confirmButtonText: "Eliminar producto",
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         const updatedCart = cart.filter(prod => prod.id !== id)
@@ -40,14 +43,14 @@ export function CartProvider({ children }) {
 
   const clearCart = () => {
     Swal.fire({
-      title: "¿Estas seguro?",
-      text: "Una vez hecho no se puede revertir.",
+      title: "¿Estás seguro?",
+      text: "Se eliminarán todos los productos del carrito.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, estoy seguro.",
-      cancelButtonText: 'Cancelar.'
+      confirmButtonText: "Vaciar carrito",
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         setCart([])
@@ -72,11 +75,10 @@ export function CartProvider({ children }) {
     return total
   }
 
-  const createNewOrder = (newOrder) => {
 
+  const createNewOrder = (newOrder) => {
     Swal.fire({
       title: "¿Finalizar compra?",
-      // text: "Una vez hecho no se puede revertir.",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -97,6 +99,10 @@ export function CartProvider({ children }) {
             icon: "success"
           });
         })
+        setTimeout(() => {
+          setCart([])
+          navigate('/')
+        }, 1000)
       }
     });
 

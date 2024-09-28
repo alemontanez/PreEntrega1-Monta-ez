@@ -39,6 +39,18 @@
 .cart-card h3, .cart-card p {
   margin: 10px 0;
 }
+.cart-card div:not(:last-child) button{
+  padding: 1px 4px;
+  margin: 0 2px;
+  min-width: 22px;
+  background-color: inherit;
+  color: rgb(121, 121, 121);
+  border: solid 1px rgb(121, 121, 121);
+  border-radius: 20px;
+}
+.cart-card div:not(:last-child) button:hover {
+  background-color: rgb(221, 221, 221);
+}
 
 .cart-final {
   display: flex;
