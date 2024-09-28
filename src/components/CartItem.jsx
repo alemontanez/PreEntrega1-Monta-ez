@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from 'react'
-import ItemCount from './ItemCount'
 import { CartContext } from '../context/CartContext'
+import ItemCount from './ItemCount'
 
 export default function CartItem({ item, removeItem }) {
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import Item from "./Item";
 import { useParams } from "react-router-dom";
-import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
+import {collection, getDocs, query, where} from 'firebase/firestore'
+import { db } from '../firebaseConfig'
+import Item from "./Item";
 
 export default function ItemList() {
 
@@ -9,12 +10,11 @@ export default function ItemList() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    const db = getFirestore()
     if (categoryId) {
       const productsCollection = query(collection(db, 'products'), where('category', '==', categoryId))
       getDocs(productsCollection).then((snapshot) => {
         if (snapshot.size === 0) {
-          console.log('no hay productos')
+          console.error('no hay productos')
         }
         setProducts(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
       })
@@ -22,7 +22,7 @@ export default function ItemList() {
       const productsCollection = collection(db, 'products')
       getDocs(productsCollection).then((snapshot) => {
         if (snapshot.size === 0) {
-          console.log('no hay productos')
+          console.error('no hay productos')
         }
         setProducts(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
       })

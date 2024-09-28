@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
 import { useContext } from 'react'
 import { CartContext } from "../context/CartContext"
+import { Link } from "react-router-dom"
 
 export default function CartWidget() {
 
@@ -8,12 +8,12 @@ export default function CartWidget() {
 
   return (
     <>
-        <Link to={'/cart'}>
-         <button>
-            <span>🛒</span>
-            {cart.length > 0 && <span>{cart.length}</span>}
-          </button>
-        </Link>
+      <Link to={'/cart'}>
+        <button>
+          <span>🛒</span>
+          {cart.length > 0 && <span>{cart.length}</span>}
+        </button>
+      </Link>
     </>
   )
 }

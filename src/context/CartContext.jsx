@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
-import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore';
-import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2'
+import { db } from '../firebaseConfig'
 
 export const CartContext = createContext()
 
@@ -83,7 +84,6 @@ export function CartProvider({ children }) {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
-        const db = getFirestore()
         const orders = collection(db, 'orders')
         addDoc(orders, newOrder).then((snapshot) => {
           const getDoc = doc(db, 'orders', snapshot.id)
