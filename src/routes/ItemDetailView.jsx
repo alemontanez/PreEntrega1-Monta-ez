@@ -1,14 +1,15 @@
-/* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {doc, getDoc, getFirestore} from 'firebase/firestore'
+import {doc, getDoc} from 'firebase/firestore'
 import { CartContext } from "../context/CartContext.jsx";
 import ItemDetail from "../components/ItemDetail.jsx";
+import { db } from '../firebaseConfig.js'
 import Swal from 'sweetalert2'
 
 export default function ItemDetailView() {
 
   const [product, setProduct] = useState({})
+  const [loading, setLoading] = useState(true)
   const { productId } = useParams()
   const [cart, setCart, addItem, , , isInCart] = useContext(CartContext)
 
@@ -68,18 +69,26 @@ export default function ItemDetailView() {
   }
 
   useEffect(() => {
-    const db = getFirestore()
     const getProduct = doc(db, 'products', productId)
     getDoc(getProduct).then((snapshot) => {
       if (snapshot.exists()) {
         setProduct({id: snapshot.id, ...snapshot.data()})
       }
+      setLoading(false)
     })
   }, [productId])
 
-  return (
-    <>
-      <ItemDetail product={product} handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count} onAdd={onAdd}/>
-    </>
-  )
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <span className="loader"></span>
+      </div>
+    )
+  } else {
+    return (
+      <>
+        <ItemDetail product={product} handleClickDec={handleClickDec} handleClickInc={handleClickInc} count={count} onAdd={onAdd}/>
+      </>
+    )
+  }
 }

@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { CartContext } from "../context/CartContext"
 import CartItem from '../components/CartItem'
-import UserInfo from "../components/UserInfo"
+import UserForm from "../components/UserForm"
 
 export default function CartView() {
 
@@ -31,7 +31,7 @@ export default function CartView() {
               <div className="cart-final">
                   <p>Precio final: ${totalToPay()}</p>
                   <div>
-                    <UserInfo cart={cart} createNewOrder={createNewOrder} clearCart={clearCart}/>
+                    <UserForm cart={cart} createNewOrder={createNewOrder} clearCart={clearCart}/>
                   </div>
               </div>
               </>

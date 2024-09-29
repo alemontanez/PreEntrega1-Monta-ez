@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useContext, useState } from 'react'
 import { CartContext } from '../context/CartContext'
 import ItemCount from './ItemCount'

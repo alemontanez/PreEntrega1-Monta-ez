@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import ItemList from './ItemList'
 import './ItemListContainer.css'
 

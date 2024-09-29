@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import ItemCount from './ItemCount'
 import './itemDetail.css'
 

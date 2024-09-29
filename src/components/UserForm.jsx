@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import { useForm } from 'react-hook-form'
 
-export default function UserInfo({ cart, createNewOrder, clearCart }) {
+export default function UserForm({ cart, createNewOrder, clearCart }) {
 
   const { register, handleSubmit,
     formState: { errors },

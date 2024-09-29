@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 export default function ItemCount( {handleClickDec, handleClickInc, count} ) {
 
   return (
